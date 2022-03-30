@@ -1,0 +1,42 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.ubivelox.study'
+version '1.0-SNAPSHOT' + new Date().format("yyyyMMddHHmmss")
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    testImplementation ('org.junit.jupiter:junit-jupiter-api')
+    //testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.1")
+            //{ exclude module:'junit-platform-commons' }
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    //testRuntimeOnly('org.junit.platform:junit-platform-engine:1.5.2')
+    //testRuntimeOnly('org.junit.platform:junit-platform-common:1.5.2')
+}
+
+test {
+    useJUnitPlatform()
+}
